@@ -15,16 +15,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val authViewModel: AuthViewModel by viewModels()
+        val authViewModel : authViewModel by viewModels()
         setContent {
             GS2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyAppNavigation(
-                        modifier = Modifier.padding(innerPadding),
-                        authViewModel = authViewModel
-                    )
+                    MyAppNavigation(modifier =  Modifier.padding(innerPadding),authViewModel = authViewModel)
                 }
             }
         }
     }
 }
+

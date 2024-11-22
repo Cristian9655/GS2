@@ -1,12 +1,18 @@
 package com.example.gs2.pages
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -19,19 +25,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gs2.AuthState
-import com.example.gs2.AuthViewModel
+import com.example.gs2.authViewModel
 
 @Composable
-fun SignupPage(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-    authViewModel: AuthViewModel
-) {
+fun SignupPage(modifier: Modifier = Modifier, navController: NavController, authViewModel: authViewModel) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
@@ -41,65 +45,102 @@ fun SignupPage(
 
     LaunchedEffect(authState.value) {
         when (authState.value) {
-            is AuthState.Authenticated -> {
-                navController.navigate("main") { // Redireciona para a estrutura principal
-                    popUpTo("signup") { inclusive = true } // Remove a tela de cadastro da pilha
-                }
-            }
+            is AuthState.Authenticated -> navController.navigate("home")
             is AuthState.Error -> Toast.makeText(
                 context,
-                (authState.value as AuthState.Error).message,
-                Toast.LENGTH_SHORT
+                (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT
             ).show()
             else -> Unit
         }
     }
 
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFECF9EC)) // Fundo: Verde claro
     ) {
-        Text(text = "Signup Page", fontSize = 32.sp)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text(text = "Name") }
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text(text = "Email") }
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text(text = "Password") }
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = { authViewModel.signup(email, password, name) },
-            enabled = authState.value != AuthState.Loading
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Create account")
-        }
+            // Título
+            Text(
+                text = "Crie sua Conta",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF4CAF50), // Verde vibrante
+                modifier = Modifier.padding(bottom = 24.dp)
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
+            // Campo Nome
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text(text = "Nome") },
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)), // Verde escuro
+                shape = RoundedCornerShape(12.dp),
+                singleLine = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White, shape = RoundedCornerShape(12.dp))
+            )
 
-        TextButton(onClick = { navController.navigate("login") }) {
-            Text(text = "Already have an account? Login")
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Campo Email
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text(text = "Email") },
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)), // Verde escuro
+                shape = RoundedCornerShape(12.dp),
+                singleLine = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White, shape = RoundedCornerShape(12.dp))
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Campo Senha
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text(text = "Senha") },
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)), // Verde escuro
+                shape = RoundedCornerShape(12.dp),
+                singleLine = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White, shape = RoundedCornerShape(12.dp))
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Botão Criar Conta
+            Button(
+                onClick = { authViewModel.signup(email, password, name) },
+                enabled = authState.value != AuthState.Loading,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)), // Verde vibrante
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Criar Conta", color = Color.White, fontWeight = FontWeight.Bold)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Texto de Navegação para Login
+            TextButton(onClick = { navController.navigate("login") }) {
+                Text(
+                    text = "Já tem uma conta? Faça login",
+                    color = Color(0xFF66BB6A), // Verde claro
+                    fontWeight = FontWeight.Medium
+                )
+            }
         }
     }
 }
-

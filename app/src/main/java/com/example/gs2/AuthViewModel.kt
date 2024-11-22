@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
-class AuthViewModel : ViewModel() {
-
+class authViewModel : ViewModel() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _authState = MutableLiveData<AuthState>()
@@ -27,29 +26,31 @@ class AuthViewModel : ViewModel() {
 
     fun login(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {
-            _authState.value = AuthState.Error("Email or password can't be empty")
+            _authState.value = AuthState.Error("Email ou senha não podem estar vazios")
             return
         }
+
         _authState.value = AuthState.Loading
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     _authState.value = AuthState.Authenticated
                 } else {
-                    _authState.value = AuthState.Error(task.exception?.message ?: "Something went wrong")
+                    _authState.value = AuthState.Error(task.exception?.message ?: "Falha no login")
                 }
             }
     }
 
     fun signup(email: String, password: String, name: String) {
         if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
-            _authState.value = AuthState.Error("All fields must be filled")
+            _authState.value = AuthState.Error("Todos os campos devem ser preenchidos")
             return
         }
         _authState.value = AuthState.Loading
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+
                     val user = auth.currentUser
                     val profileUpdates = UserProfileChangeRequest.Builder()
                         .setDisplayName(name)
@@ -59,11 +60,11 @@ class AuthViewModel : ViewModel() {
                         if (updateTask.isSuccessful) {
                             _authState.value = AuthState.Authenticated
                         } else {
-                            _authState.value = AuthState.Error("Failed to update name")
+                            _authState.value = AuthState.Error("Falha ao atualizar o nome")
                         }
                     }
                 } else {
-                    _authState.value = AuthState.Error(task.exception?.message ?: "Signup failed")
+                    _authState.value = AuthState.Error(task.exception?.message ?: "Falha no cadastro")
                 }
             }
     }
@@ -80,6 +81,7 @@ class AuthViewModel : ViewModel() {
     fun getUserEmail(): String? {
         return auth.currentUser?.email
     }
+
 }
 
 sealed class AuthState {
