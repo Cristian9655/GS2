@@ -200,8 +200,10 @@ fun HomePage(
                             clientViewModel = clientViewModel,
                             onClientDetail = { clientId ->
                                 navController.navigate("client_detail/$clientId")
-                            }
+                            },
+                            authViewModel = authViewModel // Passando o authViewModel corretamente
                         )
+
                     }
 
                     "profile" -> {
