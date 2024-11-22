@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "702009348065",
+    "project_id": "gs2cr-9ef11",
+    "storage_bucket": "gs2cr-9ef11.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702009348065:android:9a1a8b57bd420ac2d64ca0",
+        "android_client_info": {
+          "package_name": "com.example.gs2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoDKgM1PBvrkyyUhBZGnZEY7Pve2d3VkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
