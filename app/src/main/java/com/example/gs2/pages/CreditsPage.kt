@@ -28,7 +28,6 @@ fun CreditsPage(
     val clients = clientViewModel.clients.collectAsState()
     var sortOrder by remember { mutableStateOf(SortOrder.ASCENDING) }
 
-    // Ordena os clientes com base na energia disponível
     val sortedClients = remember(sortOrder, clients.value) {
         when (sortOrder) {
             SortOrder.ASCENDING -> clients.value.sortedBy { it.energyAvailable }
@@ -39,12 +38,12 @@ fun CreditsPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFECF9EC)) // Fundo: Verde claro
+            .background(Color(0xFFECF9EC))
             .padding(horizontal = 16.dp, vertical = 24.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Título da Página
+
         Text(
             text = "Créditos Disponíveis",
             fontSize = 24.sp,
@@ -53,7 +52,6 @@ fun CreditsPage(
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Botões de Ordenação
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -84,7 +82,6 @@ fun CreditsPage(
             }
         }
 
-        // Lista de clientes
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(bottom = 16.dp)
@@ -113,7 +110,7 @@ fun ExpandableCreditClientItem(client: Client) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Cabeçalho com Nome e Energia Disponível
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -126,7 +123,7 @@ fun ExpandableCreditClientItem(client: Client) {
                         text = client.name,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF388E3C) // Verde escuro
+                        color = Color(0xFF388E3C)
                     )
                     Text(
                         text = "Energia Disponível: ${client.energyAvailable} kW/h",
@@ -137,11 +134,10 @@ fun ExpandableCreditClientItem(client: Client) {
                 Text(
                     text = if (isExpanded) "Esconder ↑" else "Ver Mais ↓",
                     fontSize = 14.sp,
-                    color = Color(0xFF4CAF50) // Verde vibrante
+                    color = Color(0xFF4CAF50)
                 )
             }
 
-            // Detalhes (visíveis somente se expandido)
             if (isExpanded) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Column(
@@ -164,9 +160,8 @@ fun ExpandableCreditClientItem(client: Client) {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Botão "Adquirir"
             Button(
-                onClick = { /* Sem função */ },
+                onClick = { },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFC107)) // Amarelo solar
             ) {

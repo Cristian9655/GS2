@@ -16,7 +16,6 @@ import com.example.gs2.authViewModel
 import com.example.gs2.repository.Client
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddClientPage(
     navController: NavController,
@@ -26,11 +25,10 @@ fun AddClientPage(
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    // Recuperar nome e email automaticamente do authViewModel
     val userName = authViewModel.getUserName() ?: ""
     val userEmail = authViewModel.getUserEmail() ?: ""
 
-    // Estados para os campos
+
     var clientName by remember { mutableStateOf(userName) }
     var clientCPF by remember { mutableStateOf("") }
     var clientPhone by remember { mutableStateOf("") }
@@ -49,7 +47,7 @@ fun AddClientPage(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Título
+
         Text(
             text = "Adicionar Cliente",
             fontSize = 28.sp,
@@ -58,28 +56,24 @@ fun AddClientPage(
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        // Campo: Nome do Cliente
         CustomTextField(
             value = clientName,
             onValueChange = { clientName = it },
             label = "Nome do Cliente"
         )
 
-        // Campo: CPF
         CustomTextField(
             value = clientCPF,
             onValueChange = { clientCPF = it },
             label = "CPF"
         )
 
-        // Campo: Celular
         CustomTextField(
             value = clientPhone,
             onValueChange = { clientPhone = it },
             label = "Celular"
         )
 
-        // Campo: E-mail
         CustomTextField(
             value = clientEmail,
             onValueChange = { clientEmail = it },
@@ -87,35 +81,30 @@ fun AddClientPage(
             enabled = false
         )
 
-        // Campo: CEP
         CustomTextField(
             value = clientCEP,
             onValueChange = { clientCEP = it },
             label = "CEP"
         )
 
-        // Campo: Energia Gerada
         CustomTextField(
             value = energyGenerated,
             onValueChange = { energyGenerated = it },
             label = "Energia Gerada (kW/h)"
         )
 
-        // Campo: Energia Disponível
         CustomTextField(
             value = energyAvailable,
             onValueChange = { energyAvailable = it },
             label = "Energia Disponível (kW/h)"
         )
 
-        // Campo: Distribuidora
         CustomTextField(
             value = energyDistributor,
             onValueChange = { energyDistributor = it },
             label = "Distribuidora de Energia"
         )
 
-        // Campo: Consumo Médio
         CustomTextField(
             value = averageConsumption,
             onValueChange = { averageConsumption = it },
@@ -124,7 +113,6 @@ fun AddClientPage(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Botão: Adicionar Cliente
         Button(
             onClick = {
                 coroutineScope.launch {

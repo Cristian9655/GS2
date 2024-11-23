@@ -57,7 +57,7 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController, auth
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFECF9EC)) // Fundo: Verde claro
+            .background(Color(0xFFECF9EC))
     ) {
         Column(
             modifier = modifier
@@ -66,21 +66,19 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController, auth
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Título
             Text(
                 text = "Crie sua Conta",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF4CAF50), // Verde vibrante
+                color = Color(0xFF4CAF50),
                 modifier = Modifier.padding(bottom = 24.dp)
             )
 
-            // Campo Nome
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
                 label = { Text(text = "Nome") },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)), // Verde escuro
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)),
                 shape = RoundedCornerShape(12.dp),
                 singleLine = true,
                 modifier = Modifier
@@ -95,7 +93,7 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController, auth
                 value = email,
                 onValueChange = { email = it },
                 label = { Text(text = "Email") },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)), // Verde escuro
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)),
                 shape = RoundedCornerShape(12.dp),
                 singleLine = true,
                 modifier = Modifier
@@ -105,12 +103,11 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController, auth
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Campo Senha
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
                 label = { Text(text = "Senha") },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)), // Verde escuro
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF388E3C)),
                 shape = RoundedCornerShape(12.dp),
                 singleLine = true,
                 modifier = Modifier
@@ -120,11 +117,10 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController, auth
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Botão Criar Conta
             Button(
                 onClick = { authViewModel.signup(email, password, name) },
                 enabled = authState.value != AuthState.Loading,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)), // Verde vibrante
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -133,11 +129,10 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController, auth
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Texto de Navegação para Login
             TextButton(onClick = { navController.navigate("login") }) {
                 Text(
                     text = "Já tem uma conta? Faça login",
-                    color = Color(0xFF66BB6A), // Verde claro
+                    color = Color(0xFF66BB6A),
                     fontWeight = FontWeight.Medium
                 )
             }

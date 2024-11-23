@@ -2,7 +2,6 @@ package com.example.gs2.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -55,16 +54,14 @@ fun ClientDetailPage(clientId: String, clientViewModel: ClientViewModel = viewMo
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    // Título
                     Text(
                         text = "Detalhes do Cliente",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1565C0), // Azul vibrante
+                        color = Color(0xFF1565C0),
                         textAlign = TextAlign.Center
                     )
 
-                    // Linha de separação
                     Divider(
                         color = Color(0xFFBBDEFB),
                         thickness = 1.dp,
@@ -117,7 +114,7 @@ fun DetailItem(label: String, value: String) {
             text = label,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF1E88E5), // Azul escuro
+            color = Color(0xFF1E88E5),
             modifier = Modifier.padding(bottom = 4.dp)
         )
         Text(

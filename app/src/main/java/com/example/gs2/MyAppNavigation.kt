@@ -43,7 +43,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: authViewModel)
                 onClientDetail = { clientId ->
                     navController.navigate("client_detail/$clientId")
                 },
-                authViewModel = authViewModel // Passar authViewModel aqui
+                authViewModel = authViewModel
             )
         }
 
@@ -51,7 +51,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: authViewModel)
             AddClientPage(
                 navController = navController,
                 clientViewModel = clientViewModel,
-                authViewModel = authViewModel // Passando o authViewModel aqui
+                authViewModel = authViewModel
             )
         }
         composable(

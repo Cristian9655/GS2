@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -58,8 +57,8 @@ fun HomePage(
     Scaffold(
         bottomBar = {
             NavigationBar(
-                containerColor = Color(0xFFECF9EC), // Fundo da barra: Verde claro
-                tonalElevation = 4.dp // Elevação leve para destaque
+                containerColor = Color(0xFFECF9EC),
+                tonalElevation = 4.dp
             ) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Filled.Home, contentDescription = "Visão Geral") },
@@ -67,9 +66,9 @@ fun HomePage(
                     selected = selectedPage == "overview",
                     onClick = { selectedPage = "overview" },
                     colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color(0xFF4CAF50), // Verde
-                        unselectedIconColor = Color(0xFFA5D6A7), // Verde mais claro
-                        indicatorColor = Color(0xFFDFF5DF) // Destaque no selecionado
+                        selectedIconColor = Color(0xFF4CAF50),
+                        unselectedIconColor = Color(0xFFA5D6A7),
+                        indicatorColor = Color(0xFFDFF5DF)
                     )
                 )
                 NavigationBarItem(
@@ -78,9 +77,9 @@ fun HomePage(
                     selected = selectedPage == "clients",
                     onClick = { selectedPage = "clients" },
                     colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color(0xFFFFC107), // Amarelo Solar
-                        unselectedIconColor = Color(0xFFFFE082), // Amarelo claro
-                        indicatorColor = Color(0xFFFFF9C4) // Fundo amarelo selecionado
+                        selectedIconColor = Color(0xFFFFC107),
+                        unselectedIconColor = Color(0xFFFFE082),
+                        indicatorColor = Color(0xFFFFF9C4)
                     )
                 )
                 NavigationBarItem(
@@ -89,9 +88,9 @@ fun HomePage(
                     selected = selectedPage == "credits",
                     onClick = { selectedPage = "credits" },
                     colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color(0xFF4CAF50), // Verde
-                        unselectedIconColor = Color(0xFFA5D6A7), // Verde mais claro
-                        indicatorColor = Color(0xFFDFF5DF) // Fundo verde claro selecionado
+                        selectedIconColor = Color(0xFF4CAF50),
+                        unselectedIconColor = Color(0xFFA5D6A7),
+                        indicatorColor = Color(0xFFDFF5DF)
                     )
                 )
                 NavigationBarItem(
@@ -100,9 +99,9 @@ fun HomePage(
                     selected = selectedPage == "profile",
                     onClick = { selectedPage = "profile" },
                     colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color(0xFFFFC107), // Azul
-                        unselectedIconColor = Color(0xFFFFE082), // Amarelo claro
-                        indicatorColor = Color(0xFFFFF9C4) // Fundo amarelo selecionado
+                        selectedIconColor = Color(0xFFFFC107),
+                        unselectedIconColor = Color(0xFFFFE082),
+                        indicatorColor = Color(0xFFFFF9C4)
                     )
                 )
             }
@@ -112,7 +111,7 @@ fun HomePage(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Color(0xFFECF9EC)), // Fundo geral: Verde claro
+                .background(Color(0xFFECF9EC)),
         ) {
             Row(
                 modifier = Modifier
@@ -126,7 +125,7 @@ fun HomePage(
                     text = "SunShare",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF4CAF50) // Título: Verde vibrante
+                    color = Color(0xFF4CAF50)
                 )
 
                 TextButton(onClick = {
@@ -134,7 +133,7 @@ fun HomePage(
                 }) {
                     Text(
                         text = "Sair",
-                        color = Color(0xFFFFC107) // Vermelho suave para o botão de sair
+                        color = Color(0xFFFFC107)
                     )
                 }
             }
@@ -154,13 +153,12 @@ fun HomePage(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Navegação entre as páginas
                 when (selectedPage) {
                     "overview" -> {
                         Text(
                             text = "Energia Solar, Compartilhada de Forma Inteligente",
                             fontSize = 28.sp,
-                            color = Color(0xFF4CAF50), // Verde para títulos principais
+                            color = Color(0xFF4CAF50),
                             fontWeight = FontWeight.Bold,
                             lineHeight = 35.sp,
                             modifier = Modifier
@@ -173,7 +171,7 @@ fun HomePage(
                         Text(
                             text = "Transforme seu excesso de energia solar em benefícios reais! O SunShare conecta sistemas solares a consumidores interessados em energia limpa e acessível.",
                             fontSize = 16.sp,
-                            color = Color(0xFF388E3C), // Verde escuro
+                            color = Color(0xFF388E3C),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
@@ -201,7 +199,7 @@ fun HomePage(
                             onClientDetail = { clientId ->
                                 navController.navigate("client_detail/$clientId")
                             },
-                            authViewModel = authViewModel // Passando o authViewModel corretamente
+                            authViewModel = authViewModel
                         )
 
                     }

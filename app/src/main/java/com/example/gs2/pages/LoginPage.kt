@@ -53,7 +53,7 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController, authV
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFE3F2FD)) // Fundo: Azul claro
+            .background(Color(0xFFE3F2FD))
     ) {
         Column(
             modifier = modifier
@@ -62,12 +62,11 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController, authV
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Título
             Text(
                 text = "Bem-vindo de volta!",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF1565C0), // Azul vibrante
+                color = Color(0xFF1565C0),
                 modifier = Modifier.padding(bottom = 24.dp)
             )
 
@@ -76,7 +75,7 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController, authV
                 value = email,
                 onValueChange = { email = it },
                 label = { Text(text = "Email") },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF1E88E5)), // Azul intermediário
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF1E88E5)),
                 shape = RoundedCornerShape(12.dp),
                 singleLine = true,
                 modifier = Modifier
@@ -86,12 +85,11 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController, authV
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Campo de Senha
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
                 label = { Text(text = "Senha") },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF1E88E5)), // Azul intermediário
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color(0xFF1E88E5)),
                 shape = RoundedCornerShape(12.dp),
                 singleLine = true,
                 modifier = Modifier
@@ -101,11 +99,10 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController, authV
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Botão de Login
             Button(
                 onClick = { authViewModel.login(email, password) },
                 enabled = authState.value != AuthState.Loading,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1565C0)), // Azul vibrante
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1565C0)),
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -114,11 +111,10 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController, authV
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Texto de Navegação para Cadastro
             TextButton(onClick = { navController.navigate("signup") }) {
                 Text(
                     text = "Não tem uma conta? Cadastre-se",
-                    color = Color(0xFF42A5F5), // Azul claro
+                    color = Color(0xFF42A5F5),
                     fontWeight = FontWeight.Medium
                 )
             }
