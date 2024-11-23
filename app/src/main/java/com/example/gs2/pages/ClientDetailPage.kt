@@ -2,15 +2,20 @@ package com.example.gs2.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,7 +29,11 @@ fun ClientDetailPage(clientId: String, clientViewModel: ClientViewModel = viewMo
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFE5F4FB))
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(Color(0xFFE3F2FD), Color(0xFFE5F4FB)) // Gradiente azul claro
+                )
+            )
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -33,7 +42,7 @@ fun ClientDetailPage(clientId: String, clientViewModel: ClientViewModel = viewMo
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.White
                 ),
@@ -43,22 +52,78 @@ fun ClientDetailPage(clientId: String, clientViewModel: ClientViewModel = viewMo
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth(),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Text("Detalhes do Cliente", fontSize = 24.sp, color = Color(0xFF19326A))
-                    Text("Nome: ${client.name}", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("CPF: ${client.cpf}", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("Celular: ${client.phone}", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("E-mail: ${client.email}", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("CEP: ${client.cep}", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("Energia Gerada: ${client.energyGenerated} kW/h", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("Energia Disponível: ${client.energyAvailable} kW/h", fontSize = 20.sp, color = Color(0xFF53B4E9))
-                    Text("Distribuidora: ${client.energyDistributor}", fontSize = 20.sp, color = Color(0xFF53B4E9))
+                    // Título
+                    Text(
+                        text = "Detalhes do Cliente",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF1565C0), // Azul vibrante
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Linha de separação
+                    Divider(
+                        color = Color(0xFFBBDEFB),
+                        thickness = 1.dp,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+
+                    // Informações do cliente
+                    DetailItem(label = "Nome", value = client.name)
+                    DetailItem(label = "CPF", value = client.cpf)
+                    DetailItem(label = "Celular", value = client.phone)
+                    DetailItem(label = "E-mail", value = client.email)
+                    DetailItem(label = "CEP", value = client.cep)
+                    DetailItem(
+                        label = "Energia Gerada",
+                        value = "${client.energyGenerated} kW/h"
+                    )
+                    DetailItem(
+                        label = "Energia Disponível",
+                        value = "${client.energyAvailable} kW/h"
+                    )
+                    DetailItem(label = "Distribuidora", value = client.energyDistributor)
+                    DetailItem(
+                        label = "Consumo Médio",
+                        value = "${client.averageConsumption} kW/h"
+                    )
                 }
             }
         } else {
-            Text("Carregando cliente...", fontSize = 20.sp, color = Color.Gray)
+            Text(
+                text = "Carregando cliente...",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Gray,
+                textAlign = TextAlign.Center
+            )
         }
+    }
+}
+
+@Composable
+fun DetailItem(label: String, value: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = label,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF1E88E5), // Azul escuro
+            modifier = Modifier.padding(bottom = 4.dp)
+        )
+        Text(
+            text = value,
+            fontSize = 16.sp,
+            color = Color.Gray
+        )
     }
 }

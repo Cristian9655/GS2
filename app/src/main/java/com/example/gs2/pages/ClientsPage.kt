@@ -49,7 +49,7 @@ fun ClientsPage(
     ) {
         // Título da página
         Text(
-            text = "Seus Clientes",
+            text = "Seja locador",
             fontSize = 28.sp,
             color = Color(0xFF4CAF50), // Verde vibrante
             fontWeight = FontWeight.Bold,
@@ -64,7 +64,7 @@ fun ClientsPage(
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)) // Botão verde
         ) {
-            Text("Adicionar Novo Cliente", color = Color.White)
+            Text("Adicionar Novo Credito", color = Color.White)
         }
 
         Spacer(modifier = Modifier.height(12.dp))

@@ -69,29 +69,6 @@ fun ProfilePage(modifier: Modifier = Modifier, authViewModel: authViewModel) {
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Botões de Ação
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Button(
-                onClick = { /* Ação para editar perfil */ },
-                modifier = Modifier.weight(1f).padding(end = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)) // Verde vibrante
-            ) {
-                Text(text = "Editar Perfil", color = Color.White)
-            }
-
-            Button(
-                onClick = { /* Ação para expandir dados */ },
-                modifier = Modifier.weight(1f).padding(start = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFC107)) // Amarelo solar
-            ) {
-                Text(text = "Expandir Dados", color = Color.White)
-            }
-        }
     }
 }
 

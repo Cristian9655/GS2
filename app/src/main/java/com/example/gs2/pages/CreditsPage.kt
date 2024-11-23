@@ -26,6 +26,15 @@ fun CreditsPage(
     modifier: Modifier = Modifier
 ) {
     val clients = clientViewModel.clients.collectAsState()
+    var sortOrder by remember { mutableStateOf(SortOrder.ASCENDING) }
+
+    // Ordena os clientes com base na energia disponível
+    val sortedClients = remember(sortOrder, clients.value) {
+        when (sortOrder) {
+            SortOrder.ASCENDING -> clients.value.sortedBy { it.energyAvailable }
+            SortOrder.DESCENDING -> clients.value.sortedByDescending { it.energyAvailable }
+        }
+    }
 
     Column(
         modifier = modifier
@@ -44,12 +53,43 @@ fun CreditsPage(
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
+        // Botões de Ordenação
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(
+                onClick = { sortOrder = SortOrder.ASCENDING },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (sortOrder == SortOrder.ASCENDING) Color(0xFF4CAF50) else Color(0xFFEEEEEE)
+                )
+            ) {
+                Text(
+                    text = "Ascendente",
+                    color = if (sortOrder == SortOrder.ASCENDING) Color.White else Color(0xFF4CAF50)
+                )
+            }
+            Button(
+                onClick = { sortOrder = SortOrder.DESCENDING },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (sortOrder == SortOrder.DESCENDING) Color(0xFF4CAF50) else Color(0xFFEEEEEE)
+                )
+            ) {
+                Text(
+                    text = "Descendente",
+                    color = if (sortOrder == SortOrder.DESCENDING) Color.White else Color(0xFF4CAF50)
+                )
+            }
+        }
+
         // Lista de clientes
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(bottom = 16.dp)
         ) {
-            items(clients.value) { client ->
+            items(sortedClients) { client ->
                 ExpandableCreditClientItem(client = client)
             }
         }
@@ -134,4 +174,8 @@ fun ExpandableCreditClientItem(client: Client) {
             }
         }
     }
+}
+
+enum class SortOrder {
+    ASCENDING, DESCENDING
 }

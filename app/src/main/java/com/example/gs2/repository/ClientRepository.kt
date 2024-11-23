@@ -13,8 +13,10 @@ data class Client(
     val cep: String = "",
     val energyGenerated: Double = 0.0, // Energia gerada em kW/h
     val energyAvailable: Double = 0.0, // Energia disponível em kW/h
-    val energyDistributor: String = "" // Nome da distribuidora de energia
+    val energyDistributor: String = "", // Nome da distribuidora de energia
+    val averageConsumption: Double = 0.0 // Consumo médio em kW/h
 )
+
 
 
 class ClientRepository {
